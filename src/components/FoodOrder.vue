@@ -74,10 +74,11 @@ export default {
     },
     markToggle(food){
       food.marked = !food.marked;
-      console.log(`${food.name}: ${food.marked}`);
+      // console.log(`${food.name}: ${food.marked}`);
     },
     calTotal(){
       this.total = this.selectedFood.reduce(food=>food.price*food.ea, 0);
+      console.log(this.total);
     }
   },
   created(){
@@ -87,19 +88,19 @@ export default {
     this.calTotal();
   },
   watch: {
-    index: function(curr, prev) {
-      console.log(`Current: ${curr}, Previous: ${prev}`);
-    },
-    selectedFood: function(curr, prev){
-      console.log(curr);
-      console.log(prev)
-    },
-    markedFood: function(curr){
-      console.log(curr);
-    },
-    total: function(curr, prev){
-      console.log(`current: ${curr}, previous: ${prev} `);
-    }
+    // index: function(curr, prev) {
+    //   console.log(`Current: ${curr}, Previous: ${prev}`);
+    // },
+    // selectedFood: function(curr, prev){
+    //   console.log(curr);
+    //   console.log(prev)
+    // },
+    // markedFood: function(curr){
+    //   console.log(curr);
+    // },
+    // total: function(curr, prev){
+    //   console.log(`current: ${curr}, previous: ${prev} `);
+    // }
   }
 };
 </script>
