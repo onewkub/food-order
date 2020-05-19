@@ -23,10 +23,9 @@
 <script>
 export default {
   name: "Check",
-  props: ["selectedList"],
+  props: ["selectedList", "total"],
   data() {
     return {
-      total: 0
     };
   },
   methods: {

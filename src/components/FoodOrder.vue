@@ -9,7 +9,7 @@
       </ul>
     </div>
     <div class="content">
-        <List v-if="index === 0" class="content-tab" :foodList="markedFood" @markFood="markToggle"></List>
+        <List v-if="index === 0" class="content-tab" :foodList="markedFood" @markFood="markToggle" :total="total"></List>
         <Check v-else-if="index === 1" class="content-tab" :selectedList="selectedFood" @addFood="addFood" @removeFood="removeFood"></Check>
         <Success v-else-if="index === 2" class="content-tab"></Success>
     </div>
