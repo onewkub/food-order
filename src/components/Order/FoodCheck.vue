@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Check</h1>
+    <h1>Customize</h1>
     <div class="foodList">
       <ul>
         <li v-for="food in selectedList" :key="food.id">
@@ -16,14 +16,14 @@
         </li>
       </ul>
     </div>
-    <h2>Total: {{total}}</h2>
+    <h2>Total: {{totalCost}}</h2>
   </div>
 </template>
 
 <script>
 export default {
   name: "Check",
-  props: ["selectedList", "total"],
+  props: ["selectedList", "totalCost"],
   data() {
     return {
     };

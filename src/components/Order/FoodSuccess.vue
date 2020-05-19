@@ -1,18 +1,13 @@
 <template>
-  <div>
-      <h1>
-          Success
-      </h1>
-  </div>
+  <h1>Your order had been sent.</h1>
 </template>
 
 <script>
 export default {
   name: "Success"
-
-}
+};
 </script>
 
-<style>
+<style scoped>
 
 </style>

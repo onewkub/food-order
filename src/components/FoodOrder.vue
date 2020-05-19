@@ -4,18 +4,19 @@
     <div class="wrapper-progress">
       <ul class="progress-bar">
         <li :class="{active: index>=0}" @click="index=0">Order</li>
-        <li :class="{active: index>=1}" @click="index=1">Check</li>
+        <li :class="{active: index>=1}" @click="index=1">Customize</li>
         <li :class="{active: index>=2}" @click="index=2">Success</li>
       </ul>
     </div>
     <div class="content">
-        <List v-if="index === 0" class="content-tab" :foodList="markedFood" @markFood="markToggle" :total="total"></List>
-        <Check v-else-if="index === 1" class="content-tab" :selectedList="selectedFood" @addFood="addFood" @removeFood="removeFood"></Check>
+        <List v-if="index === 0" class="content-tab" :foodList="markedFood" @markFood="markToggle" ></List>
+        <Check v-else-if="index === 1" class="content-tab" :selectedList="selectedFood" @addFood="addFood" @removeFood="removeFood" :totalCost="total"></Check>
         <Success v-else-if="index === 2" class="content-tab"></Success>
     </div>
     <div class="action">
       <Button @click="previosPage()" v-if="index>0 && index !== 2">Back</Button>
-      <button @click="nextPage()" v-if="index<2">Next</button>
+      <button @click="nextPage()" v-if="index===0">Next</button>
+      <button @click="nextPage()" v-if="index===1">Send Food Order</button>
       <button @click="index = 0" v-if="index===2">Back to Order</button>
     </div>
   </div>
@@ -44,20 +45,25 @@ export default {
       index: 0,
       selectedFood: [],
       markedFood:[],
-      total: 0
+      // total: 0
     };
   },
   props: [],
   methods: {
     nextPage() {
       if (this.index < 2) this.index++;
-      if(this.index === 1) {this.initSelectedFood(); this.calTotal();}
+      if(this.index === 1) {this.initSelectedFood();}
+      if(this.index === 2) {
+        this.initMarkedFood();
+        this.selectedFood = [];
+      }
     },
     previosPage() {
       if (this.index >= 0) this.index--;
     },
     addFood(food){
       food.ea++;
+      
     },
     removeFood(food){
       if(food.ea> 0){
@@ -74,12 +80,14 @@ export default {
       food.marked = !food.marked;
       // console.log(`${food.name}: ${food.marked}`);
     },
-    calTotal(){
-      this.total = 5//this.selectedFood.reduce(food=>food.price*food.ea, 0);
-    }
   },
   created(){
     this.initMarkedFood();
+  },
+  computed: {
+    total(){
+      return this.selectedFood.reduce((t ,food)=>t+food.price*food.ea, 0);
+    }
   },
   watch: {
     // index: function(curr, prev) {
@@ -88,21 +96,26 @@ export default {
     selectedFood: function(curr, prev){
       console.log(curr);
       console.log(prev);
-      this.calTotal();
     },
     // markedFood: function(curr){
     //   console.log(curr);
     // },
-    // total: function(curr, prev){
-    //   console.log(`current: ${curr}, previous: ${prev} `);
-    // }
+    total: function(curr, prev){
+      console.log(`current: ${curr}, previous: ${prev} `);
+    }
   }
 };
 </script>
 
 <style>
 .content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 20vh;
+}
+.content .content-tab{
+  width: 100%;
 }
 .wrapper-progress {
   width: 100%;
