@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <FoodOrder></FoodOrder>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import FoodOrder from './components/FoodOrder.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    FoodOrder
   }
 }
 </script>
@@ -22,7 +20,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: white;
+  padding: 2rem;
+}
+body{
+  background-color: #121212;
 }
 </style>
