@@ -51,19 +51,17 @@ export default {
   methods: {
     nextPage() {
       if (this.index < 2) this.index++;
-      if(this.index === 1) this.initSelectedFood();
+      if(this.index === 1) {this.initSelectedFood(); this.calTotal();}
     },
     previosPage() {
       if (this.index >= 0) this.index--;
     },
     addFood(food){
       food.ea++;
-      this.calTotal()
     },
     removeFood(food){
       if(food.ea> 0){
         food.ea--;
-        this.calTotal();
       }
     },
     initMarkedFood(){
@@ -77,8 +75,7 @@ export default {
       // console.log(`${food.name}: ${food.marked}`);
     },
     calTotal(){
-      this.total = this.selectedFood.reduce(food=>food.price*food.ea, 0);
-      console.log(this.total);
+      this.total = 5//this.selectedFood.reduce(food=>food.price*food.ea, 0);
     }
   },
   created(){
