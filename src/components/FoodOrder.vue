@@ -84,17 +84,15 @@ export default {
   created(){
     this.initMarkedFood();
   },
-  updated(){
-    this.calTotal();
-  },
   watch: {
     // index: function(curr, prev) {
     //   console.log(`Current: ${curr}, Previous: ${prev}`);
     // },
-    // selectedFood: function(curr, prev){
-    //   console.log(curr);
-    //   console.log(prev)
-    // },
+    selectedFood: function(curr, prev){
+      console.log(curr);
+      console.log(prev);
+      this.calTotal();
+    },
     // markedFood: function(curr){
     //   console.log(curr);
     // },
