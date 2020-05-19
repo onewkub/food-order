@@ -16,6 +16,7 @@
         </li>
       </ul>
     </div>
+    <h2>Total: {{total}}</h2>
   </div>
 </template>
 
@@ -24,7 +25,9 @@ export default {
   name: "Check",
   props: ["selectedList"],
   data() {
-    return {};
+    return {
+      total: 0
+    };
   },
   methods: {
     addFood(food) {
@@ -59,18 +62,6 @@ li{
   cursor: pointer;
   background-color: #353333e3;
   border: rgba(252, 239, 67, 0.5) solid 0.05rem;
-}
-
-.food-selector:hover{
-  background-color: #444343;
-}
-
-.food-selector:active{
-  background-color: #292929e0;
-}
-
-.food-selector .selected{
-  background-color: #414141;
 }
 
 .food-selector .ea{

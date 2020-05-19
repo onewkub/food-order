@@ -9,8 +9,8 @@
       </ul>
     </div>
     <div class="content">
-        <List v-if="index === 0" class="content-tab" :foodList="markedFood" @addFood="addFood" @removeFood="removeFood" @markFood="markToggle"></List>
-        <Check v-else-if="index === 1" class="content-tab"></Check>
+        <List v-if="index === 0" class="content-tab" :foodList="markedFood" @markFood="markToggle"></List>
+        <Check v-else-if="index === 1" class="content-tab" :selectedList="selectedFood" @addFood="addFood" @removeFood="removeFood"></Check>
         <Success v-else-if="index === 2" class="content-tab"></Success>
     </div>
     <div class="action">
@@ -43,34 +43,48 @@ export default {
       ],
       index: 0,
       selectedFood: [],
-      markedFood:[]
+      markedFood:[],
+      total: 0
     };
   },
   props: [],
   methods: {
     nextPage() {
       if (this.index < 2) this.index++;
+      if(this.index === 1) this.initSelectedFood();
     },
     previosPage() {
       if (this.index >= 0) this.index--;
     },
     addFood(food){
       food.ea++;
+      this.calTotal()
     },
     removeFood(food){
-      if(food.ea> 0)food.ea--;
+      if(food.ea> 0){
+        food.ea--;
+        this.calTotal();
+      }
     },
     initMarkedFood(){
       this.markedFood = this.foods.map(food => {return {...food, marked: false}})
     },
+    initSelectedFood(){
+      this.selectedFood = this.markedFood.filter(food => food.marked).map(food=> {{return {...food, ea: 1}}});
+    },
     markToggle(food){
       food.marked = !food.marked;
       console.log(`${food.name}: ${food.marked}`);
-
+    },
+    calTotal(){
+      this.total = this.selectedFood.reduce(food=>food.price*food.ea, 0);
     }
   },
   created(){
     this.initMarkedFood();
+  },
+  updated(){
+    this.calTotal();
   },
   watch: {
     index: function(curr, prev) {
@@ -82,6 +96,9 @@ export default {
     },
     markedFood: function(curr){
       console.log(curr);
+    },
+    total: function(curr, prev){
+      console.log(`current: ${curr}, previous: ${prev} `);
     }
   }
 };
